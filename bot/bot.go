@@ -60,6 +60,10 @@ func (b *Bot) Stop() error {
 	return nil
 }
 
+func (b *Bot) PostTweet(message string) {
+	b.client.PostTweet(message)
+}
+
 func (b *Bot) RegisterCallback(t callback.Type, cb callback.Callback) (id int) {
 	if _, ok := b.callbacks[t]; !ok {
 		b.callbacks[t] = make(map[int]callback.Callback)
