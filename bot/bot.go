@@ -32,6 +32,10 @@ func New(screenName string, consumerConfig twitter.ConsumerConfig, accessConfig 
 	return b
 }
 
+func (b *Bot) ScreenName() string {
+	return b.screenName
+}
+
 func (b *Bot) Start() error {
 	if activeBot == nil {
 		activeBot = b
