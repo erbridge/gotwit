@@ -60,10 +60,6 @@ func (b *Bot) Stop() error {
 	return nil
 }
 
-func (b *Bot) PostTweet(message string) error {
-	return b.client.PostTweet(message)
-}
-
 func (b *Bot) RegisterCallback(t callback.Type, cb callback.Callback) (id int) {
 	if _, ok := b.callbacks[t]; !ok {
 		b.callbacks[t] = make(map[int]callback.Callback)
@@ -102,4 +98,12 @@ func (b *Bot) handle(tweet anaconda.Tweet) {
 			return
 		}
 	}
+}
+
+func (b *Bot) Post(message string, nsfw bool) error {
+	return b.client.Post(message, nsfw)
+}
+
+func (b *Bot) Reply(tweet anaconda.Tweet, message string, nsfw bool) error {
+	return b.client.Reply(tweet, message, nsfw)
 }
