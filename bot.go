@@ -1,4 +1,4 @@
-package bot
+package gotwit
 
 import (
 	"errors"
@@ -22,7 +22,7 @@ var (
 	activeBot *Bot
 )
 
-func New(screenName string, consumerConfig twitter.ConsumerConfig, accessConfig twitter.AccessConfig) Bot {
+func NewBot(screenName string, consumerConfig twitter.ConsumerConfig, accessConfig twitter.AccessConfig) Bot {
 	b := Bot{
 		screenName:     screenName,
 		consumerConfig: consumerConfig,
