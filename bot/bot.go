@@ -102,6 +102,8 @@ func (b *Bot) handle(tweet anaconda.Tweet) {
 			return
 		}
 	}
+
+	b.triggerCallback(callback.Post, tweet)
 }
 
 func (b *Bot) Post(message string, nsfw bool) error {

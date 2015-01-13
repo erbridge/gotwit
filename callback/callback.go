@@ -14,4 +14,5 @@ const (
 	Retweet Type = iota
 	Reply
 	Mention
+	Post
 )
