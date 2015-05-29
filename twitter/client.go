@@ -30,7 +30,7 @@ func (c *Client) handleStream() {
 	}
 }
 
-func (c *Client) Start() (err error) {
+func (c *Client) Start() error {
 	if ok, err := c.api.VerifyCredentials(); !ok {
 		return err
 	}
@@ -39,20 +39,14 @@ func (c *Client) Start() (err error) {
 		"replies": {"all"},
 	}
 
-	if c.stream, err = c.api.UserStream(v); err != nil {
-		return err
-	}
-
+	c.stream = c.api.UserStream(v)
 	c.handleStream()
 
 	return nil
 }
 
 func (c *Client) Stop() (err error) {
-	if err = c.stream.Close(); err != nil {
-		return
-	}
-
+	c.stream.End()
 	c.api.Close()
 
 	return
