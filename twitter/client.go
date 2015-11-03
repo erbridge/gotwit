@@ -10,7 +10,7 @@ import (
 type (
 	Client struct {
 		api      *anaconda.TwitterApi
-		stream   anaconda.Stream
+		stream   *anaconda.Stream
 		callback func(t anaconda.Tweet)
 	}
 )
@@ -46,7 +46,7 @@ func (c *Client) Start() error {
 }
 
 func (c *Client) Stop() (err error) {
-	c.stream.End()
+	c.stream.Stop()
 	c.api.Close()
 
 	return
