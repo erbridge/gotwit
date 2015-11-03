@@ -11,11 +11,11 @@ type (
 	Client struct {
 		api      *anaconda.TwitterApi
 		stream   *anaconda.Stream
-		callback func(t anaconda.Tweet)
+		callback func(t Tweet)
 	}
 )
 
-func NewClient(accessConfig AccessConfig, callback func(t anaconda.Tweet)) Client {
+func NewClient(accessConfig AccessConfig, callback func(t Tweet)) Client {
 	return Client{
 		api:      anaconda.NewTwitterApi(accessConfig.token, accessConfig.tokenSecret),
 		callback: callback,
@@ -24,7 +24,7 @@ func NewClient(accessConfig AccessConfig, callback func(t anaconda.Tweet)) Clien
 
 func (c *Client) handleStream() {
 	for t := range c.stream.C {
-		if t, ok := t.(anaconda.Tweet); ok {
+		if t, ok := t.(Tweet); ok {
 			c.callback(t)
 		}
 	}
@@ -64,7 +64,7 @@ func (c *Client) Post(message string, nsfw bool) error {
 	return c.post(message, v)
 }
 
-func (c *Client) Reply(tweet anaconda.Tweet, message string, nsfw bool) error {
+func (c *Client) Reply(tweet Tweet, message string, nsfw bool) error {
 	v := url.Values{
 		"possibly_sensitive":    {strconv.FormatBool(nsfw)},
 		"in_reply_to_status_id": {tweet.IdStr},

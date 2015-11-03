@@ -1,11 +1,11 @@
 package callback
 
 import (
-	"github.com/ChimeraCoder/anaconda"
+	"github.com/erbridge/gotwit/twitter"
 )
 
 type (
-	Callback func(anaconda.Tweet)
+	Callback func(twitter.Tweet)
 
 	Type int
 )

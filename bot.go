@@ -3,7 +3,6 @@ package gotwit
 import (
 	"errors"
 
-	"github.com/ChimeraCoder/anaconda"
 	"github.com/erbridge/gotwit/callback"
 	"github.com/erbridge/gotwit/twitter"
 )
@@ -79,13 +78,13 @@ func (b *Bot) UnregisterCallback(t callback.Type, id int) {
 	delete(b.callbacks[t], id)
 }
 
-func (b *Bot) triggerCallback(t callback.Type, tweet anaconda.Tweet) {
+func (b *Bot) triggerCallback(t callback.Type, tweet twitter.Tweet) {
 	for _, cb := range b.callbacks[t] {
 		cb(tweet)
 	}
 }
 
-func (b *Bot) handle(tweet anaconda.Tweet) {
+func (b *Bot) handle(tweet twitter.Tweet) {
 	if tweet.RetweetedStatus != nil {
 		b.triggerCallback(callback.Retweet, tweet)
 		return
@@ -110,6 +109,6 @@ func (b *Bot) Post(message string, nsfw bool) error {
 	return b.client.Post(message, nsfw)
 }
 
-func (b *Bot) Reply(tweet anaconda.Tweet, message string, nsfw bool) error {
+func (b *Bot) Reply(tweet twitter.Tweet, message string, nsfw bool) error {
 	return b.client.Reply(tweet, message, nsfw)
 }
