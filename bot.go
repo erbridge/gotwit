@@ -27,7 +27,9 @@ func NewBot(screenName string, consumerConfig twitter.ConsumerConfig, accessConf
 		consumerConfig: consumerConfig,
 		callbacks:      make(map[callback.Type]map[int]callback.Callback),
 	}
+
 	b.client = twitter.NewClient(accessConfig, b.handle)
+
 	return b
 }
 
