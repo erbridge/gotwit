@@ -53,6 +53,7 @@ func (c *Client) Stop() (err error) {
 
 func (c *Client) post(message string, v url.Values) error {
 	_, err := c.api.PostTweet(message, v)
+
 	return err
 }
 
@@ -60,6 +61,7 @@ func (c *Client) Post(message string, nsfw bool) error {
 	v := url.Values{
 		"possibly_sensitive": {strconv.FormatBool(nsfw)},
 	}
+
 	return c.post(message, v)
 }
 
@@ -68,5 +70,6 @@ func (c *Client) Reply(tweet Tweet, message string, nsfw bool) error {
 		"possibly_sensitive":    {strconv.FormatBool(nsfw)},
 		"in_reply_to_status_id": {tweet.IdStr},
 	}
+
 	return c.post(message, v)
 }

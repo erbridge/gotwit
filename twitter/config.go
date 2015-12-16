@@ -41,21 +41,28 @@ func NewAccessConfig(token string, tokenSecret string) AccessConfig {
 
 func LoadConfigFile(f string) (c ConsumerConfig, a AccessConfig, err error) {
 	var conf map[string]string
+
 	bytes, _ := ioutil.ReadFile(f)
+
 	if err = json.Unmarshal(bytes, &conf); err != nil {
 		return
 	}
+
 	c.key = conf["consumer_key"]
 	c.secret = conf["consumer_secret"]
+
 	a.token = conf["access_token"]
 	a.tokenSecret = conf["access_token_secret"]
+
 	return
 }
 
 func LoadConfigEnv() (c ConsumerConfig, a AccessConfig, err error) {
 	c.key = os.Getenv(ConsumerKeyEnv)
 	c.secret = os.Getenv(ConsumerSecretEnv)
+
 	a.token = os.Getenv(AccessTokenEnv)
 	a.tokenSecret = os.Getenv(AccessTokenSecretEnv)
+
 	return
 }
