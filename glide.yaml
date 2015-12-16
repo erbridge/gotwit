@@ -1,5 +1,3 @@
-parent: null
-package: gotwit
+package: github.com/erbridge/gotwit
 import:
 - package: github.com/ChimeraCoder/anaconda
-  version: 4b2bf11c3f29812ce4507e50d43864e90f0499aa
