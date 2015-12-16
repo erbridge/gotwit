@@ -24,6 +24,11 @@ func main() {
 
 	// Register callbacks here.
 
-	b.Start()
-	b.Stop()
+	if err := b.Start(); err != nil {
+		panic(err)
+	}
+
+	if err := b.Stop(); err != nil {
+		panic(err)
+	}
 }

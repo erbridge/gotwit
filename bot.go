@@ -47,9 +47,8 @@ func (b *Bot) Start() error {
 	}
 
 	twitter.BindConsumer(b.consumerConfig)
-	b.client.Start()
 
-	return nil
+	return b.client.Start()
 }
 
 func (b *Bot) Stop() error {
@@ -60,9 +59,8 @@ func (b *Bot) Stop() error {
 	}
 
 	twitter.UnbindConsumer()
-	b.client.Stop()
 
-	return nil
+	return b.client.Stop()
 }
 
 func (b *Bot) RegisterCallback(t callback.Type, cb callback.Callback) (id int) {
@@ -73,6 +71,7 @@ func (b *Bot) RegisterCallback(t callback.Type, cb callback.Callback) (id int) {
 	id = b.nextCallbackId
 	b.callbacks[t][id] = cb
 	b.nextCallbackId++
+
 	return
 }
 
