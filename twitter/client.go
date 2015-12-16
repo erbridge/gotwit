@@ -46,7 +46,7 @@ func (c *Client) Start() error {
 }
 
 func (c *Client) Stop() (err error) {
-	close(c.stream.C)
+	c.stream.Stop()
 
 	return
 }
