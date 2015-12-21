@@ -73,3 +73,25 @@ func (c *Client) Reply(tweet Tweet, message string, nsfw bool) error {
 
 	return c.post(message, v)
 }
+
+func (c *Client) LastTweetText(name string) (text string, err error) {
+	v := url.Values{
+		"screen_name": {name},
+		"count":       {"1"},
+		"trim_user":   {"true"},
+	}
+
+	t, err := c.api.GetUserTimeline(v)
+
+	if err != nil {
+		return
+	}
+
+	if len(t) == 0 {
+		return
+	}
+
+	text = t[0].Text
+
+	return
+}

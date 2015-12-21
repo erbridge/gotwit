@@ -113,3 +113,7 @@ func (b *Bot) Post(message string, nsfw bool) error {
 func (b *Bot) Reply(tweet twitter.Tweet, message string, nsfw bool) error {
 	return b.client.Reply(tweet, message, nsfw)
 }
+
+func (b *Bot) LastTweetText() (string, error) {
+	return b.client.LastTweetText(b.ScreenName())
+}
