@@ -40,7 +40,8 @@ func (c *Client) Start() error {
 	}
 
 	c.stream = c.api.UserStream(v)
-	c.handleStream()
+
+	go c.handleStream()
 
 	return nil
 }
